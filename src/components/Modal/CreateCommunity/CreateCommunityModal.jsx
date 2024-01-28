@@ -1,15 +1,15 @@
-import { auth, db, storage,  } from '@/src/firebase/clientApp';
+import { createPostAtom } from '@/src/atoms/createPost';
+import { auth, db, storage, } from '@/src/firebase/clientApp';
 import { Box, Button, Checkbox, Flex, Icon, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Text } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import { doc, setDoc } from 'firebase/firestore';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { BsFillEyeFill, BsFillPersonFill } from "react-icons/bs";
-import { HiLockClosed } from "react-icons/hi";
-import { v4 } from "uuid"
 import { FaCloudUploadAlt } from 'react-icons/fa';
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-import { doc, setDoc } from 'firebase/firestore';
+import { HiLockClosed } from "react-icons/hi";
 import { useRecoilState } from 'recoil';
-import { createPostAtom } from '@/src/atoms/createPost'
+import { v4 } from "uuid";
 
 const CreateCommunityModal = ({ open, handleClose }) => {
     const [user] = useAuthState(auth)
@@ -58,13 +58,12 @@ const CreateCommunityModal = ({ open, handleClose }) => {
         }
     };
     const handleCreateCommunity = async () => {
-        if (postV.title.length !== 0 && postV.body.length && postV.thumbnail !== null && postV.forWho.length !== 0) {
+        if (postV.title.length !== 0 && postV.body.length && postV.thumbnail !== null && postV.forWho.length !== 0)  {
             setLoading(true)
             let imageRef = ref(storage, `post-images/${postV.thumbnail.name + v4()}`);
             await uploadBytes(imageRef, postV.thumbnail);
             const url = await getDownloadURL(imageRef)
                 const dateNow = String(new Date()).slice(3, 15)
-                
                 const newPost = {
                     id: v4(),
                     title: postV.title,

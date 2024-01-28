@@ -17,6 +17,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx","**.jsx" , "src/atoms/posts.jsx", "src/pages/api/createPost.js", "src/components/main/PopularUsers.js", "src/components/Modal/CreateCommunity/CreateCommunityModal.jsx", "src/components/main/posts.tsx", "src/pages/posts/[postId].jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx","**.jsx" , "src/atoms/posts.jsx", "src/pages/api/createPost.js", "src/components/main/PopularUsers.js", "src/components/Modal/CreateCommunity/CreateCommunityModal.jsx", "src/components/main/posts.tsx", "src/pages/posts/[postId].jsx", "src/components/Navbar/SearchInput.jsx"],
   "exclude": ["node_modules"]
 }
